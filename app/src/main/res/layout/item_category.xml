@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_84sdp"
+    android:layout_marginBottom="@dimen/_15sdp"
+
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_42sdp"
+        android:layout_marginRight="@dimen/_29sdp"
+        android:background="@drawable/shape_category"
+        android:elevation="3dp"
+        android:layout_marginBottom="@dimen/_2sdp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:layout_marginTop="@dimen/_17sdp"
+            android:fontFamily="@font/bod"
+            android:text="Pizza"
+            android:textColor="#333355"
+            android:textSize="@dimen/_24ssp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_50sdp"
+            android:text="25 items"
+            android:textColor="#888"
+            android:textSize="@dimen/_14ssp" />
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/_60sdp"
+        android:layout_height="@dimen/_60sdp"
+        android:layout_gravity="left|center"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:layout_marginLeft="@dimen/_14sdp"
+        android:elevation="3.1dp"
+        android:src="@drawable/img_category_pizza" />
+
+    <ImageView
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_gravity="right|center"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:layout_marginRight="@dimen/_14sdp"
+        android:background="@drawable/shape_arrow"
+        android:elevation="3.1dp"
+        android:padding="@dimen/_9sdp"
+        android:src="@drawable/ic_arrow"
+        app:tint="?attr/colorPrimary" />
+</FrameLayout>
