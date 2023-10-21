@@ -15,7 +15,9 @@ class CategoryFragment : Fragment(),CategoryAdapter.CategoryItemOnClick {
     lateinit var binding: FragmentCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // TODO: container and attachtoparent should be added
         binding = FragmentCategoryBinding.inflate(layoutInflater)
+        //TODO: these codes should be add to oncreaate view
         val categoryList: ArrayList<Category> = arrayListOf(
             Category(
                 "Pizza",
