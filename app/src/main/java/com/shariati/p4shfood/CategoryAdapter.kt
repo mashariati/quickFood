@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class CategoryAdapter(private val data: ArrayList<Category>) :
+class CategoryAdapter(private val data: ArrayList<Category>,private val itemOnClick:CategoryItemOnClick) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
 
@@ -27,7 +27,7 @@ class CategoryAdapter(private val data: ArrayList<Category>) :
                 .into(categoryImage)
 
             itemView.setOnClickListener{
-                
+                itemOnClick.onCategoryItemOnclick()
             }
         }
     }
@@ -44,5 +44,8 @@ class CategoryAdapter(private val data: ArrayList<Category>) :
 
     override fun onBindViewHolder(holder: CategoryViewHolder, position: Int) {
         holder.bindData(position)
+    }
+    interface CategoryItemOnClick{
+        fun onCategoryItemOnclick()
     }
 }

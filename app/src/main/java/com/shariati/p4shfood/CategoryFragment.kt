@@ -5,12 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentCategoryBinding
 
-class CategoryFragment : Fragment() {
+class CategoryFragment : Fragment(),CategoryAdapter.CategoryItemOnClick {
     lateinit var binding: FragmentCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +50,7 @@ class CategoryFragment : Fragment() {
             )
 
         )
-        val categoryAdapter = CategoryAdapter(categoryList)
+        val categoryAdapter = CategoryAdapter(categoryList,this)
         binding.categoryRecyclerView.adapter = categoryAdapter
         binding.categoryRecyclerView.layoutManager  = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
     }
@@ -62,6 +63,9 @@ class CategoryFragment : Fragment() {
         return binding.root
     }
 
+    override fun onCategoryItemOnclick() {
+        Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+    }
 
 
 }
