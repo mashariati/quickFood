@@ -27,7 +27,7 @@ class CategoryAdapter(private val data: ArrayList<Category>,private val itemOnCl
                 .into(categoryImage)
 
             itemView.setOnClickListener{
-                itemOnClick.onCategoryItemOnclick()
+                itemOnClick.onCategoryItemOnclick(position)
             }
         }
     }
@@ -46,6 +46,6 @@ class CategoryAdapter(private val data: ArrayList<Category>,private val itemOnCl
         holder.bindData(position)
     }
     interface CategoryItemOnClick{
-        fun onCategoryItemOnclick()
+        fun onCategoryItemOnclick(pos: Int)
     }
 }

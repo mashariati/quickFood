@@ -6,18 +6,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentCategoryBinding
+import com.shariati.p4shfood.databinding.FragmentMenuBinding
+import kotlin.math.log
 
-class CategoryFragment : Fragment(),CategoryAdapter.CategoryItemOnClick {
+class CategoryFragment(private val categoryCh:FragmentChanged) : Fragment(),CategoryAdapter.CategoryItemOnClick {
     lateinit var binding: FragmentCategoryBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // TODO: container and attachtoparent should be added
         binding = FragmentCategoryBinding.inflate(layoutInflater)
-        //TODO: these codes should be add to oncreaate view
+
         val categoryList: ArrayList<Category> = arrayListOf(
             Category(
                 "Pizza",
@@ -61,12 +63,26 @@ class CategoryFragment : Fragment(),CategoryAdapter.CategoryItemOnClick {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         // Inflate the layout for this fragment
         return binding.root
     }
 
-    override fun onCategoryItemOnclick() {
-        Toast.makeText(context, "hello", Toast.LENGTH_SHORT).show()
+    override fun onStart() {
+        super.onStart()
+        categoryCh.fragmentChanged("category")
+    }
+    override fun onCategoryItemOnclick(pos:Int) {
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+                transaction.replace(R.id.fragment_container,MenuFragment(categoryCh))
+                transaction.addToBackStack(null)
+                transaction.commit()
+        //pass the position to menu fragment
+        val bundle = Bundle()
+        bundle.putInt("position",pos)
+        parentFragmentManager.setFragmentResult("pos",bundle)
+
     }
 
 
