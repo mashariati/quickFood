@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
+import androidx.fragment.app.FragmentManager
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentMenuBinding
 
@@ -32,7 +33,10 @@ class MainActivity : AppCompatActivity(), FragmentChanged {
                     R.anim.exit_right_to_left
                 )
                 transaction.replace(R.id.fragment_container, CategoryFragment(this))
+                supportFragmentManager.popBackStack()
                 transaction.commit()
+
+
             }
         }
 

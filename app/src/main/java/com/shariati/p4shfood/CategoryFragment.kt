@@ -20,6 +20,13 @@ class CategoryFragment(private val categoryCh:FragmentChanged) : Fragment(),Cate
         super.onCreate(savedInstanceState)
         binding = FragmentCategoryBinding.inflate(layoutInflater)
 
+    }
+
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        //set category adapter
         val categoryList: ArrayList<Category> = arrayListOf(
             Category(
                 "Pizza",
@@ -42,7 +49,7 @@ class CategoryFragment(private val categoryCh:FragmentChanged) : Fragment(),Cate
             ,
             Category ("Beverages",
                 25,
-"https://www.uplooder.net/img/image/66/621999a1f54c831322b196025aaa0d34/pngtree-coffee-coffee-cup-top-view-png-image-6695188.png"            ),
+                "https://www.uplooder.net/img/image/66/621999a1f54c831322b196025aaa0d34/pngtree-coffee-coffee-cup-top-view-png-image-6695188.png"            ),
             Category ("Desserts",
                 10,
                 "https://www.uplooder.net/img/image/72/66fe583be5faf8414233736940531a29/top-up-view-cup-cake-strawberry-with-transparency-488442-82-prev-ui.png"
@@ -57,13 +64,6 @@ class CategoryFragment(private val categoryCh:FragmentChanged) : Fragment(),Cate
         val categoryAdapter = CategoryAdapter(categoryList,this)
         binding.categoryRecyclerView.adapter = categoryAdapter
         binding.categoryRecyclerView.layoutManager  = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-
         // Inflate the layout for this fragment
         return binding.root
     }

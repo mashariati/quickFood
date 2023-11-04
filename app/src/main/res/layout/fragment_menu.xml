@@ -1,18 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuFragment">
+    tools:context=".MenuFragment"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/menu_name"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/_250sdp"
+        android:lines="2"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment" />
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:paddingLeft="@dimen/_37sdp"
+        android:paddingRight="@dimen/_10sdp"
+        android:text="Salads menu"
+        android:fontFamily="@font/ultra_reqular"
+        android:textColor="?attr/colorSecondaryVariant"
+        android:textSize="@dimen/_30ssp"/>
 
-</FrameLayout>
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="@dimen/_13sdp"
+        android:id="@+id/menu_recycler_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:listitem="@layout/item_menu"
+        />
+
+</LinearLayout>

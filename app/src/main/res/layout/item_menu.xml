@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/_19sdp">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="@dimen/_38sdp"
+    android:layout_marginRight="@dimen/_25sdp"
+    android:background="@drawable/shape_category"
+    android:elevation="2dp"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:layout_marginBottom="@dimen/_3sdp"
+    android:orientation="vertical">
+<TextView
+    android:id="@+id/item_menu_name"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Fried rice with egg and onion"
+    android:fontFamily="@font/times"
+    android:textColor="#333355"
+    android:textSize="@dimen/_17ssp"
+    android:textStyle="bold"
+    android:layout_marginLeft="@dimen/_70sdp"
+    android:layout_marginRight="@dimen/_36sdp"
+    android:layout_marginTop="@dimen/_16sdp"
+    android:layout_marginBottom="@dimen/_7sdp" />
+    <RatingBar
+        android:id="@+id/item_menu_rating"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:rating="2.5"
+        android:progressTint="#fdcc11"
+        android:layout_gravity="center"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        />
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_70sdp"
+        android:layout_marginRight="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_16sdp" >
+        <TextView
+            android:id="@+id/item_menu_weight"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="250gr"
+            android:layout_gravity="center|left"
+            android:fontFamily="@font/times"
+            android:textColor="#aaa"
+            android:textSize="@dimen/_13ssp"
+            />
+        <TextView
+            android:id="@+id/item_menu_price"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="7.50$"
+            android:layout_gravity="center|right"
+            android:fontFamily="@font/times"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="@dimen/_15ssp"
+            android:textStyle="bold"
+            />
+    </FrameLayout>
+
+</LinearLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2.1dp"
+        android:layout_gravity="center|left">
+        <ImageView
+            android:layout_width="@dimen/_105sdp"
+            android:layout_height="@dimen/_105sdp"
+            android:src="@drawable/shape_blob"
+            android:elevation="1dp"
+            app:tint="#DCEDC8"/>
+        <ImageView
+            android:id="@+id/item_menu_image"
+            android:layout_width="@dimen/_55sdp"
+            android:layout_height="@dimen/_55sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_category_pizza"
+            android:elevation="1dp" />
+    </FrameLayout>
+    <ImageView
+        android:layout_width="@dimen/_34sdp"
+        android:layout_height="@dimen/_34sdp"
+        android:layout_gravity="right|center"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:background="@drawable/shape_arrow"
+        android:elevation="2.1dp"
+        android:foreground="?android:attr/selectableItemBackground"
+        android:padding="@dimen/_10sdp"
+        android:src="@drawable/ic_plus"
+        app:tint="?attr/colorPrimary" />
+</FrameLayout>
