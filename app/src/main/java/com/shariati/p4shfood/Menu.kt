@@ -5,5 +5,6 @@ data class Menu(
     val menuImage:String,
     val menuRating:Float,
     val menuWeight:Int,
-    val menuPrice:Float
+    val menuPrice:Float,
+    val menuDetails:String
 )

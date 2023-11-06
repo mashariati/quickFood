@@ -17,7 +17,6 @@
         android:fontFamily="@font/ultra_reqular"
         android:textColor="?attr/colorSecondaryVariant"
         android:textSize="@dimen/_30ssp"/>
-
     <androidx.recyclerview.widget.RecyclerView
         android:layout_marginTop="@dimen/_13sdp"
         android:id="@+id/menu_recycler_view"

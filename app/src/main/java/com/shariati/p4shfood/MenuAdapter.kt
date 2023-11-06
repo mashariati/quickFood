@@ -1,17 +1,22 @@
 package com.shariati.p4shfood
 
+import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import android.content.Context
+import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AccelerateDecelerateInterpolator
+import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
+import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter(private val menuItemsList:ArrayList<Menu>, private val itemOnClick:MenuItemOnClick):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     inner class MenuViewHolder(itemView:View,private val context:Context):RecyclerView.ViewHolder(itemView){
         val menuImage=itemView.findViewById<ImageView>(R.id.item_menu_image)
@@ -19,8 +24,9 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
         val menuRating=itemView.findViewById<RatingBar>(R.id.item_menu_rating)
         val menuWeight=itemView.findViewById<TextView>(R.id.item_menu_weight)
         val menuPrice=itemView.findViewById<TextView>(R.id.item_menu_price)
+        val menuDetails=itemView.findViewById<TextView>(R.id.item_menu_details_text)
 
-        fun bindMenuItem(position: Int){
+        fun bindMenuItem(position: Int, holder: MenuViewHolder){
             Glide.with(context)
                 .load(menuItemsList[position].menuImage)
                 .into(menuImage)
@@ -28,6 +34,31 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
             menuRating.rating = menuItemsList[position].menuRating
             menuWeight.text = menuItemsList[position].menuWeight.toString()+"gr"
             menuPrice.text = menuItemsList[position].menuPrice.toString()+"$"
+            menuDetails.text=menuItemsList[position].menuDetails
+            itemView.findViewById<ImageView>(R.id.item_menu_add).setOnClickListener {
+                itemOnClick.onMenuItemOnClick(position,
+                    menuItemsList[position].menuName, menuItemsList[position].menuRating, menuItemsList[position].menuImage, menuItemsList[position].menuWeight, menuItemsList[position].menuPrice)
+            }
+            itemView.setOnClickListener{
+                if(holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility==View.GONE) {
+                    holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility =
+                        View.VISIBLE
+                    val alphaHolder = PropertyValuesHolder.ofFloat("alpha", 0f, 1f)
+                    val scaleYAnimator = ObjectAnimator.ofPropertyValuesHolder(
+                        holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details),
+                        alphaHolder
+                    )
+                    scaleYAnimator.duration = 1000
+                    scaleYAnimator.interpolator = AccelerateDecelerateInterpolator()
+                    scaleYAnimator.start()
+
+                }
+                else{
+                    holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility =
+                        View.GONE
+
+                }
+            }
         }
     }
 
@@ -41,6 +72,12 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-    holder.bindMenuItem(position)
+    holder.bindMenuItem(position,holder)
+
+
+    }
+    interface MenuItemOnClick{
+        fun onMenuItemOnClick(position: Int,itemName:String,itemRaring:Float,itemImage:String,itemWight:Int,itemPrice:Float)
+
     }
 }

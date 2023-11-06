@@ -11,7 +11,6 @@
     android:layout_marginRight="@dimen/_25sdp"
     android:background="@drawable/shape_category"
     android:elevation="2dp"
-    android:foreground="?android:attr/selectableItemBackground"
     android:layout_marginBottom="@dimen/_3sdp"
     android:orientation="vertical">
 <TextView
@@ -21,12 +20,63 @@
     android:text="Fried rice with egg and onion"
     android:fontFamily="@font/times"
     android:textColor="#333355"
-    android:textSize="@dimen/_17ssp"
+    android:textSize="@dimen/_15ssp"
     android:textStyle="bold"
     android:layout_marginLeft="@dimen/_70sdp"
-    android:layout_marginRight="@dimen/_36sdp"
-    android:layout_marginTop="@dimen/_16sdp"
+    android:layout_marginRight="@dimen/_20sdp"
+    android:layout_marginTop="@dimen/_20sdp"
     android:layout_marginBottom="@dimen/_7sdp" />
+    <FrameLayout
+        android:id="@+id/item_menu_details"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+        <ImageView
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:layout_gravity="left|center"
+            android:layout_marginBottom="@dimen/_20sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/ic_heart"
+            app:tint="#ddd" />
+        <ImageView
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:layout_gravity="left|center"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_7sdp"
+            android:src="@drawable/ic_comment"
+            app:tint="#ddd" />
+        <ImageView
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:layout_gravity="left|center"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:layout_marginLeft="@dimen/_15sdp"
+            android:foreground="?android:attr/selectableItemBackground"
+            android:padding="@dimen/_6sdp"
+            android:src="@drawable/ic_share"
+            app:tint="#ddd" />
+        <TextView
+            android:id="@+id/item_menu_details_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English"
+        android:fontFamily="@font/times"
+        android:textColor="#556677"
+        android:textSize="@dimen/_14ssp"
+        android:textStyle="normal"
+        android:elevation="3dp"
+        android:layout_marginLeft="@dimen/_70sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginBottom="@dimen/_7sdp"
+        android:layout_gravity="right|center"/>
+    </FrameLayout>
     <RatingBar
         android:id="@+id/item_menu_rating"
         android:layout_width="wrap_content"
@@ -34,16 +84,17 @@
         style="@style/Widget.AppCompat.RatingBar.Small"
         android:rating="2.5"
         android:progressTint="#fdcc11"
-        android:layout_gravity="center"
-        android:layout_marginRight="@dimen/_25sdp"
+        android:layout_gravity="center|left"
+        android:layout_marginLeft="@dimen/_70sdp"
         android:layout_marginBottom="@dimen/_7sdp"
         />
+
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="@dimen/_70sdp"
-        android:layout_marginRight="@dimen/_36sdp"
-        android:layout_marginBottom="@dimen/_16sdp" >
+        android:layout_marginRight="@dimen/_26sdp"
+        android:layout_marginBottom="@dimen/_14sdp" >
         <TextView
             android:id="@+id/item_menu_weight"
             android:layout_width="wrap_content"
@@ -52,7 +103,7 @@
             android:layout_gravity="center|left"
             android:fontFamily="@font/times"
             android:textColor="#aaa"
-            android:textSize="@dimen/_13ssp"
+            android:textSize="@dimen/_12ssp"
             />
         <TextView
             android:id="@+id/item_menu_price"
@@ -72,10 +123,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2.1dp"
-        android:layout_gravity="center|left">
+        android:layout_gravity="top|left">
         <ImageView
-            android:layout_width="@dimen/_105sdp"
-            android:layout_height="@dimen/_105sdp"
+            android:layout_width="@dimen/_102sdp"
+            android:layout_height="@dimen/_102sdp"
             android:src="@drawable/shape_blob"
             android:elevation="1dp"
             app:tint="#DCEDC8"/>
@@ -88,10 +139,11 @@
             android:elevation="1dp" />
     </FrameLayout>
     <ImageView
+        android:id="@+id/item_menu_add"
         android:layout_width="@dimen/_34sdp"
         android:layout_height="@dimen/_34sdp"
-        android:layout_gravity="right|center"
-        android:layout_marginBottom="@dimen/_1sdp"
+        android:layout_gravity="right|bottom"
+        android:layout_marginBottom="@dimen/_40sdp"
         android:layout_marginRight="@dimen/_10sdp"
         android:background="@drawable/shape_arrow"
         android:elevation="2.1dp"
@@ -99,4 +151,5 @@
         android:padding="@dimen/_10sdp"
         android:src="@drawable/ic_plus"
         app:tint="?attr/colorPrimary" />
+
 </FrameLayout>
