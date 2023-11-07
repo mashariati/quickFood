@@ -1,6 +1,7 @@
 package com.shariati.p4shfood
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.FragmentResultListener
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.shariati.p4shfood.databinding.FragmentCategoryBinding
+import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentMenuBinding
 
-class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.MenuItemOnClick {
+class MenuFragment(private val menuCh:FragmentChanged) : Fragment(){
     lateinit var binding: FragmentMenuBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,7 +37,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.
                             Menu("Bianca","https://www.uplooder.net/img/image/80/7cffa51e69e0f4d52ba1fd7f293af4eb/product-beauty-the-bianca-1445x.png",3.5f,300,22f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                             Menu("Pepperoni","https://www.uplooder.net/img/image/82/f63ebfbec3310106227f10d16af7401c/product-beauty-the-pepperoni-750x.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                         )
-                        binding.menuRecyclerView.adapter=MenuAdapter(pizzaMenuList,this@MenuFragment)
+                        binding.menuRecyclerView.adapter=MenuAdapter(pizzaMenuList)
                         binding.menuRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
                         binding.menuName.text="Pizza menu"
@@ -50,7 +51,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.
                             Menu("Grilled Beef & Haloumi","https://www.uplooder.net/img/image/55/e10a9c2cba40813aed2885bdf25e258a/تصویر-صفحه-2023-11-04-183222-prev-ui.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                             Menu("Sumo's Famous Chicken Caesar","https://www.uplooder.net/img/image/26/a083ccf9b0c4aeb02512848bc733dd8a/تصویر-صفحه-2023-11-04-183233-prev-ui.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                         )
-                        binding.menuRecyclerView.adapter=MenuAdapter(saladsMenuList,this@MenuFragment)
+                        binding.menuRecyclerView.adapter=MenuAdapter(saladsMenuList)
                         binding.menuRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
                         binding.menuName.text="Salads menu"
@@ -63,7 +64,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.
                             Menu("Bianca","https://www.uplooder.net/img/image/80/7cffa51e69e0f4d52ba1fd7f293af4eb/product-beauty-the-bianca-1445x.png",3.5f,300,22f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                             Menu("Pepperoni","https://www.uplooder.net/img/image/82/f63ebfbec3310106227f10d16af7401c/product-beauty-the-pepperoni-750x.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                         )
-                        binding.menuRecyclerView.adapter=MenuAdapter(pizzaMenuList,this@MenuFragment)
+                        binding.menuRecyclerView.adapter=MenuAdapter(pizzaMenuList)
                         binding.menuRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
                         binding.menuName.text="Deserts menu"
@@ -77,7 +78,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.
                             Menu("Grilled Beef & Haloumi","https://www.uplooder.net/img/image/55/e10a9c2cba40813aed2885bdf25e258a/تصویر-صفحه-2023-11-04-183222-prev-ui.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                             Menu("Sumo's Famous Chicken Caesar","https://www.uplooder.net/img/image/26/a083ccf9b0c4aeb02512848bc733dd8a/تصویر-صفحه-2023-11-04-183233-prev-ui.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                         )
-                        binding.menuRecyclerView.adapter=MenuAdapter(saladsMenuList,this@MenuFragment)
+                        binding.menuRecyclerView.adapter=MenuAdapter(saladsMenuList)
                         binding.menuRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
                         binding.menuName.text="Pasta menu"
@@ -90,7 +91,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.
                             Menu("Bianca","https://www.uplooder.net/img/image/80/7cffa51e69e0f4d52ba1fd7f293af4eb/product-beauty-the-bianca-1445x.png",3.5f,300,22f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                             Menu("Pepperoni","https://www.uplooder.net/img/image/82/f63ebfbec3310106227f10d16af7401c/product-beauty-the-pepperoni-750x.png",4.6f,300,24.99f,"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete account of the system, and expound the actual teachings of the great explorer of the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself, because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally"),
                         )
-                        binding.menuRecyclerView.adapter=MenuAdapter(pizzaMenuList,this@MenuFragment)
+                        binding.menuRecyclerView.adapter=MenuAdapter(pizzaMenuList)
                         binding.menuRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
                         binding.menuName.text="Beverages menu"
@@ -115,16 +116,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(),MenuAdapter.
 
     }
 
-    override fun onMenuItemOnClick(
-        position: Int,
-        itemName: String,
-        itemRaring: Float,
-        itemImage: String,
-        itemWight: Int,
-        itemPrice: Float
-    ) {
 
-    }
 
 
 }

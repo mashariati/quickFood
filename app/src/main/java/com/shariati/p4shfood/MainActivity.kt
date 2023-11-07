@@ -1,18 +1,24 @@
 package com.shariati.p4shfood
 
 import android.animation.ObjectAnimator
+import android.animation.PropertyValuesHolder
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
+import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentMenuBinding
 
-class MainActivity : AppCompatActivity(), FragmentChanged {
+class MainActivity : AppCompatActivity(), FragmentChanged{
     private lateinit var binding: ActivityMainBinding
     var isMenuBarEnable = true
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
             //inflate activity
@@ -42,7 +48,9 @@ class MainActivity : AppCompatActivity(), FragmentChanged {
 
 
     }
+    fun menuItemOnCLick(){
 
+    }
 //Changing the color of the views when the fragment changes
     override fun fragmentChanged(frag: String) {
         when (frag) {
@@ -69,4 +77,29 @@ class MainActivity : AppCompatActivity(), FragmentChanged {
         }
     }
 
+var cartItemNumber = 0
+    fun onMenuAdd(menuModel: MenuModel) {
+        if( binding.goToCart.visibility==View.GONE){
+        binding.goToCart.visibility=View.VISIBLE
+        binding.goToCartNumber.visibility=View.VISIBLE
+            val alphaButton = PropertyValuesHolder.ofFloat("alpha", 0f, 1f)
+            val scaleYAnimator = ObjectAnimator.ofPropertyValuesHolder(
+                binding.goToCart,
+                alphaButton
+            )
+            val scaleYAnimator2 = ObjectAnimator.ofPropertyValuesHolder(
+                binding.goToCartNumber,
+                alphaButton
+            )
+            scaleYAnimator.duration = 200
+            scaleYAnimator.interpolator = AccelerateDecelerateInterpolator()
+            scaleYAnimator.start()
+            scaleYAnimator2.duration = 200
+            scaleYAnimator2.interpolator = AccelerateDecelerateInterpolator()
+            scaleYAnimator2.start()}
+        cartItemNumber++
+        binding.goToCartNumber.text=cartItemNumber.toString()
+
+
+    }
 }

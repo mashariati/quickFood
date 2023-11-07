@@ -3,7 +3,6 @@ package com.shariati.p4shfood
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
 import android.content.Context
-import android.opengl.Visibility
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,7 +15,7 @@ import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class MenuAdapter(private val menuItemsList:ArrayList<Menu>, private val itemOnClick:MenuItemOnClick):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
+class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
     inner class MenuViewHolder(itemView:View,private val context:Context):RecyclerView.ViewHolder(itemView){
         val menuImage=itemView.findViewById<ImageView>(R.id.item_menu_image)
@@ -35,9 +34,17 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>, private val itemOnC
             menuWeight.text = menuItemsList[position].menuWeight.toString()+"gr"
             menuPrice.text = menuItemsList[position].menuPrice.toString()+"$"
             menuDetails.text=menuItemsList[position].menuDetails
+            val menuModel = MenuModel(
+                menuItemsList[position].menuImage,
+                menuItemsList[position].menuName,
+                menuItemsList[position].menuRating,
+                menuItemsList[position].menuWeight,
+                menuItemsList[position].menuPrice,
+                menuItemsList[position].menuDetails
+            )
             itemView.findViewById<ImageView>(R.id.item_menu_add).setOnClickListener {
-                itemOnClick.onMenuItemOnClick(position,
-                    menuItemsList[position].menuName, menuItemsList[position].menuRating, menuItemsList[position].menuImage, menuItemsList[position].menuWeight, menuItemsList[position].menuPrice)
+                val mainActivity = context as MainActivity
+                mainActivity.onMenuAdd(menuModel)
             }
             itemView.setOnClickListener{
                 if(holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility==View.GONE) {
@@ -76,8 +83,11 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>, private val itemOnC
 
 
     }
-    interface MenuItemOnClick{
-        fun onMenuItemOnClick(position: Int,itemName:String,itemRaring:Float,itemImage:String,itemWight:Int,itemPrice:Float)
 
-    }
 }
+data class MenuModel(val menuImage: String,
+                     val menuName: String,
+                     val menuRating: Float,
+                     val menuWeight: Int,
+                     val menuPrice: Float,
+                     val menuDetails: String)

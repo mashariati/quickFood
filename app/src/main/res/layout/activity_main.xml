@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
     android:background="?attr/colorSecondaryVariant"
+    android:orientation="horizontal"
     tools:context=".MainActivity">
 
 
@@ -44,10 +44,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+
         <FrameLayout
-            android:paddingVertical="@dimen/_25sdp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingVertical="@dimen/_25sdp">
+
             <ImageButton
                 android:id="@+id/menu_bar"
                 android:layout_width="wrap_content"
@@ -56,25 +58,56 @@
                 android:layout_marginLeft="@dimen/_37sdp"
                 android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_menu_bar"
-                app:tint="?attr/colorOnPrimary"
-                />
+                app:tint="?attr/colorOnPrimary" />
+
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center"
+                android:layout_marginRight="@dimen/_37sdp"
                 android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_cart"
                 app:tint="#ccc"
-                android:layout_marginRight="@dimen/_37sdp"
 
                 />
         </FrameLayout>
+
         <FrameLayout
             android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/go_to_cart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|center"
+                android:layout_marginBottom="@dimen/_30sdp"
+                android:background="@drawable/shape_go_to_cart"
+                android:backgroundTint="#004D40"
+                android:elevation="@dimen/_30sdp"
+                android:layout_marginHorizontal="@dimen/_60sdp"
+                android:paddingVertical="@dimen/_10sdp"
+                android:fontFamily="@font/ultra_reqular"
+                android:text="Go to cart"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_11ssp"
+                android:visibility="gone" />
 
+            <TextView
+                android:id="@+id/go_to_cart_number"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_gravity="bottom|right"
+                android:layout_marginBottom="@dimen/_55sdp"
+                android:layout_marginRight="@dimen/_55sdp"
+                android:background="@drawable/shape_category"
+                android:backgroundTint="@color/red"
+                android:gravity="center"
+                android:elevation="@dimen/_30sdp"
+                android:text="1"
+                android:textColor="@color/white"
+                android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
