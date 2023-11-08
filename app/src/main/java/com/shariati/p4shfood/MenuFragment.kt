@@ -95,7 +95,7 @@ class MenuFragment(private val menuCh:FragmentChanged) : Fragment(){
                         binding.menuRecyclerView.layoutManager=LinearLayoutManager(context,LinearLayoutManager.VERTICAL,false)
 
                         binding.menuName.text="Beverages menu"
-                        binding.menuName.textSize= 33F
+                        binding.menuName.textSize= 28F
                     }
 
                 }

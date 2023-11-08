@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/menu_name"
-        android:layout_width="@dimen/_250sdp"
+        android:layout_width="@dimen/_220sdp"
         android:lines="2"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/_37sdp"
@@ -16,13 +16,14 @@
         android:text="Salads menu"
         android:fontFamily="@font/ultra_reqular"
         android:textColor="?attr/colorSecondaryVariant"
-        android:textSize="@dimen/_30ssp"/>
+        android:textSize="@dimen/_28ssp"/>
     <androidx.recyclerview.widget.RecyclerView
-        android:layout_marginTop="@dimen/_13sdp"
+        android:layout_marginTop="@dimen/_15sdp"
         android:id="@+id/menu_recycler_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:listitem="@layout/item_menu"
+        android:layout_marginBottom="@dimen/_5sdp"
         />
 
 </LinearLayout>

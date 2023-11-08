@@ -2,15 +2,18 @@ package com.shariati.p4shfood
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
 import android.view.animation.AnimationUtils
 import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentMenuBinding
@@ -24,6 +27,8 @@ class MainActivity : AppCompatActivity(), FragmentChanged{
             //inflate activity
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        //set transparent status bar and navigation bar
+        window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
         //start category fragment
         val transaction = supportFragmentManager.beginTransaction()
         transaction.add(R.id.fragment_container, CategoryFragment(this))
@@ -96,7 +101,9 @@ var cartItemNumber = 0
             scaleYAnimator.start()
             scaleYAnimator2.duration = 200
             scaleYAnimator2.interpolator = AccelerateDecelerateInterpolator()
-            scaleYAnimator2.start()}
+            scaleYAnimator2.start()
+        binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.red),android.graphics.PorterDuff.Mode.SRC_IN)
+        }
         cartItemNumber++
         binding.goToCartNumber.text=cartItemNumber.toString()
 
