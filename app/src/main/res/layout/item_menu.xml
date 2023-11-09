@@ -148,7 +148,6 @@
         android:layout_marginRight="@dimen/_10sdp"
         android:background="@drawable/shape_arrow"
         android:elevation="1.7dp"
-        android:foreground="?android:attr/selectableItemBackground"
         android:padding="@dimen/_9sdp"
         android:src="@drawable/ic_plus"
         app:tint="?attr/colorPrimary" />

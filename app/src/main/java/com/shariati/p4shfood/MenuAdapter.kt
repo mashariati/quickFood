@@ -11,6 +11,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -45,6 +46,7 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
             itemView.findViewById<ImageView>(R.id.item_menu_add).setOnClickListener {
                 val mainActivity = context as MainActivity
                 mainActivity.onMenuAdd(menuModel)
+
             }
             itemView.setOnClickListener{
                 if(holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility==View.GONE) {

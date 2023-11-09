@@ -6,6 +6,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.AccelerateDecelerateInterpolator
@@ -14,6 +15,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentManager
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentMenuBinding
@@ -81,7 +83,7 @@ class MainActivity : AppCompatActivity(), FragmentChanged{
             }
         }
     }
-
+//click to the add button in menu fragment
 var cartItemNumber = 0
     fun onMenuAdd(menuModel: MenuModel) {
         if( binding.goToCart.visibility==View.GONE){
@@ -106,6 +108,8 @@ var cartItemNumber = 0
         }
         cartItemNumber++
         binding.goToCartNumber.text=cartItemNumber.toString()
+
+
 
 
     }
