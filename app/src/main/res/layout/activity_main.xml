@@ -18,7 +18,8 @@
         app:layout_constraintEnd_toStartOf="@+id/view9"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/view9" />
+        app:layout_constraintTop_toTopOf="@+id/view9"
+        android:layout_marginRight=".1dp"/>
 
     <View
         android:id="@+id/view9"
@@ -28,7 +29,8 @@
         app:layout_constraintEnd_toStartOf="@+id/view10"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view8"
-        app:layout_constraintTop_toTopOf="@+id/view10" />
+        app:layout_constraintTop_toTopOf="@+id/view10"
+        android:layout_marginRight=".1dp"/>
 
     <View
         android:id="@+id/view10"
@@ -39,7 +41,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/view9"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -71,7 +74,7 @@
 
                 android:background="?android:attr/selectableItemBackground"
                 android:src="@drawable/ic_cart"
-                app:tint="#ccc"
+                app:tint="@color/cart_color"
 
                 />
 

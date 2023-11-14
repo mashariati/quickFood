@@ -2,6 +2,7 @@ package com.shariati.p4shfood
 
 import android.animation.ObjectAnimator
 import android.animation.PropertyValuesHolder
+import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -17,13 +18,14 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.FragmentManager
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.shariati.p4shfood.databinding.ActivityMainBinding
 import com.shariati.p4shfood.databinding.FragmentMenuBinding
 
 class MainActivity : AppCompatActivity(), FragmentChanged{
     private lateinit var binding: ActivityMainBinding
     var isMenuBarEnable = true
-
+    var isCartFull = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
             //inflate activity
@@ -52,10 +54,68 @@ class MainActivity : AppCompatActivity(), FragmentChanged{
 
             }
         }
+        //go to cart fragment
+        binding.goToCart.setOnClickListener{
+            val transaction = supportFragmentManager.beginTransaction()
+            transaction.setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+            transaction.replace(R.id.fragment_container,CartFragment(this))
+            transaction.addToBackStack(null)
+            transaction.commit()
 
+            val alphaButton = PropertyValuesHolder.ofFloat("alpha", 0f, 1f)
+            val scaleYAnimator = ObjectAnimator.ofPropertyValuesHolder(
+                binding.cartIcon,
+                alphaButton
+            )
+            val scaleYAnimator2 = ObjectAnimator.ofPropertyValuesHolder(
+                binding.goToCartNumber,
+                alphaButton
+            )
+            scaleYAnimator.duration = 600
+            scaleYAnimator.interpolator = AccelerateDecelerateInterpolator()
+            scaleYAnimator.start()
+            scaleYAnimator2.duration = 600
+            scaleYAnimator2.interpolator = AccelerateDecelerateInterpolator()
+            scaleYAnimator2.start()
+            binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.white),android.graphics.PorterDuff.Mode.SRC_IN)
+            binding.goToCart.visibility=View.GONE
+            binding.goToCartNumber.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
+            binding.goToCartNumber.setTextColor(getColor(R.color.red))
+            isCartFull=false
+        }
+        binding.cartIcon.setOnClickListener {
+            if(isCartFull){
+                val transaction2 = supportFragmentManager.beginTransaction()
+                transaction2.setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+                transaction2.replace(R.id.fragment_container,CartFragment(this))
+                transaction2.addToBackStack(null)
+                transaction2.commit()
 
-    }
-    fun menuItemOnCLick(){
+                val alphaButton = PropertyValuesHolder.ofFloat("alpha", 0f, 1f)
+                val scaleYAnimator = ObjectAnimator.ofPropertyValuesHolder(
+                    binding.cartIcon,
+                    alphaButton
+                )
+                val scaleYAnimator2 = ObjectAnimator.ofPropertyValuesHolder(
+                    binding.goToCartNumber,
+                    alphaButton
+                )
+                scaleYAnimator.duration = 600
+                scaleYAnimator.interpolator = AccelerateDecelerateInterpolator()
+                scaleYAnimator.start()
+                scaleYAnimator2.duration = 600
+                scaleYAnimator2.interpolator = AccelerateDecelerateInterpolator()
+                scaleYAnimator2.start()
+
+                binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.white),android.graphics.PorterDuff.Mode.SRC_IN)
+                binding.goToCart.visibility=View.GONE
+                binding.goToCartNumber.backgroundTintList = ColorStateList.valueOf(getColor(R.color.white))
+                binding.goToCartNumber.setTextColor(getColor(R.color.red))
+
+                isCartFull=false
+            }
+        }
+
 
     }
 //Changing the color of the views when the fragment changes
@@ -67,7 +127,17 @@ class MainActivity : AppCompatActivity(), FragmentChanged{
                 binding.view10.setBackgroundResource(R.color.white_dark)
                 binding.menuBar.setImageResource(R.drawable.ic_menu_bar)
                 isMenuBarEnable = true
-
+                if(cartItemNumber>0) {
+                    binding.cartIcon.setColorFilter(
+                        ContextCompat.getColor(this, R.color.red),
+                        android.graphics.PorterDuff.Mode.SRC_IN
+                    )
+                    binding.goToCart.visibility = View.VISIBLE
+                    binding.goToCartNumber.backgroundTintList =
+                        ColorStateList.valueOf(getColor(R.color.red))
+                    binding.goToCartNumber.setTextColor(getColor(R.color.white))
+                    isCartFull=true
+                }
             }
 
             "menu" -> {
@@ -79,6 +149,27 @@ class MainActivity : AppCompatActivity(), FragmentChanged{
                 binding.view10.setBackgroundResource(R.color.white_dark)
                 binding.menuBar.setImageResource(R.drawable.ic_arrow_left)
                 isMenuBarEnable=false
+                if(cartItemNumber>0) {
+                    binding.cartIcon.setColorFilter(
+                        ContextCompat.getColor(this, R.color.red),
+                        android.graphics.PorterDuff.Mode.SRC_IN
+                    )
+                    binding.goToCart.visibility = View.VISIBLE
+                    binding.goToCartNumber.backgroundTintList =
+                        ColorStateList.valueOf(getColor(R.color.red))
+                    binding.goToCartNumber.setTextColor(getColor(R.color.white))
+                    isCartFull=true
+                }
+            }
+            "cart" -> {
+                binding.view8.setBackgroundResource(R.color.red)
+                binding.view9.setBackgroundResource(R.color.red)
+                binding.view10.setBackgroundResource(R.color.red)
+                var animLeftToRight =
+                    AnimationUtils.loadAnimation(applicationContext, R.anim.enter_left_to_right)
+                binding.view10.startAnimation(animLeftToRight)
+                binding.menuBar.setImageResource(R.drawable.ic_menu_bar)
+                isMenuBarEnable=true
 
             }
         }
@@ -105,6 +196,7 @@ var cartItemNumber = 0
             scaleYAnimator2.interpolator = AccelerateDecelerateInterpolator()
             scaleYAnimator2.start()
         binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.red),android.graphics.PorterDuff.Mode.SRC_IN)
+            isCartFull=true
         }
         cartItemNumber++
         binding.goToCartNumber.text=cartItemNumber.toString()

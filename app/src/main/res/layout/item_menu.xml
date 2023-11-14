@@ -149,6 +149,7 @@
         android:background="@drawable/shape_arrow"
         android:elevation="1.7dp"
         android:padding="@dimen/_9sdp"
+        android:foreground="?attr/selectableItemBackground"
         android:src="@drawable/ic_plus"
         app:tint="?attr/colorPrimary" />
 
