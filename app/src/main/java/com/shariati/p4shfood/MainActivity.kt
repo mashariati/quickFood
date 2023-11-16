@@ -176,7 +176,8 @@ class MainActivity : AppCompatActivity(), FragmentChanged{
     }
 //click to the add button in menu fragment
 var cartItemNumber = 0
-    fun onMenuAdd(menuModel: MenuModel) {
+     var cartItem:ArrayList<Cart> = arrayListOf()
+    fun onMenuAdd(cartModel: Cart) {
         if( binding.goToCart.visibility==View.GONE){
         binding.goToCart.visibility=View.VISIBLE
         binding.goToCartNumber.visibility=View.VISIBLE
@@ -198,11 +199,32 @@ var cartItemNumber = 0
         binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.red),android.graphics.PorterDuff.Mode.SRC_IN)
             isCartFull=true
         }
-        cartItemNumber++
-        binding.goToCartNumber.text=cartItemNumber.toString()
 
 
-
+        //add item to cartItem array
+        var doesHaveAnInstance=false
+cartItem.forEach {
+    if(it.cartName==cartModel.cartName){
+       it.cartNumber +=1
+        doesHaveAnInstance=true
+    }
+}
+        if(!doesHaveAnInstance){
+            cartItem.add(cartModel)
+            cartItemNumber = cartItem.size
+            binding.goToCartNumber.text=cartItemNumber.toString()
+}
 
     }
+//removed an item from cart when you click to minus button
+fun minusItem(item:Cart){
+    cartItem.forEach {
+        if(it.cartName==item.cartName){
+            it.cartNumber--
+
+        }
+
+    }
+    }
+
 }

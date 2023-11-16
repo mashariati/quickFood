@@ -35,13 +35,14 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
             menuWeight.text = menuItemsList[position].menuWeight.toString()+"gr"
             menuPrice.text = menuItemsList[position].menuPrice.toString()+"$"
             menuDetails.text=menuItemsList[position].menuDetails
-            val menuModel = MenuModel(
-                menuItemsList[position].menuImage,
+
+            var menuModel = Cart(
                 menuItemsList[position].menuName,
+                menuItemsList[position].menuImage,
                 menuItemsList[position].menuRating,
                 menuItemsList[position].menuWeight,
                 menuItemsList[position].menuPrice,
-                menuItemsList[position].menuDetails
+                1
             )
             itemView.findViewById<ImageView>(R.id.item_menu_add).setOnClickListener {
                 val mainActivity = context as MainActivity
@@ -87,9 +88,3 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
     }
 
 }
-data class MenuModel(val menuImage: String,
-                     val menuName: String,
-                     val menuRating: Float,
-                     val menuWeight: Int,
-                     val menuPrice: Float,
-                     val menuDetails: String)

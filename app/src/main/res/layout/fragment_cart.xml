@@ -25,12 +25,12 @@
             android:textColor="?attr/colorSecondaryVariant"
             android:textSize="@dimen/_29ssp"/>
         <androidx.recyclerview.widget.RecyclerView
-            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_5sdp"
             android:layout_weight="8.7"
             android:id="@+id/cart_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            tools:listitem="@layout/item_menu"
+            tools:listitem="@layout/item_cart"
 
             />
 
@@ -88,6 +88,7 @@
                 android:textColor="#333355"
                 />
             <TextView
+                android:id="@+id/item_menu_n_items"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="3"
@@ -113,6 +114,7 @@
                 android:textColor="#333355"
                 />
             <TextView
+                android:id="@+id/item_menu_p_items"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="25.75$"
@@ -138,6 +140,7 @@
                 android:textColor="#333355"
                 />
             <TextView
+                android:id="@+id/item_menu_t_items"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="1$"
@@ -163,6 +166,7 @@
                 android:textColor="#333355"
                 />
             <TextView
+                android:id="@+id/item_menu_tp_items"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="26.75$"

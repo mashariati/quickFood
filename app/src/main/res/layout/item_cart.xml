@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_21sdp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/_38sdp"
+        android:layout_marginRight="@dimen/_25sdp"
+        android:background="@drawable/shape_category"
+        android:elevation="1.5dp"
+        android:layout_marginBottom="@dimen/_3sdp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/item_cart_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fried rice with egg and onion"
+            android:fontFamily="@font/calibri"
+            android:textColor="#333355"
+            android:textSize="@dimen/_14ssp"
+            android:textStyle="bold"
+            android:layout_marginLeft="@dimen/_70sdp"
+            android:layout_marginRight="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_7sdp" />
+
+        <RatingBar
+            android:id="@+id/item_cart_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:rating="2.5"
+            android:progressTint="#fdcc11"
+            android:layout_gravity="center|left"
+            android:layout_marginLeft="@dimen/_70sdp"
+            android:layout_marginBottom="@dimen/_7sdp"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_70sdp"
+            android:layout_marginRight="@dimen/_26sdp"
+            android:layout_marginBottom="@dimen/_15sdp" >
+            <TextView
+                android:id="@+id/item_cart_weight"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="250gr"
+                android:layout_gravity="center|left"
+                android:fontFamily="@font/calibri_r"
+                android:textColor="#aaa"
+                android:textSize="@dimen/_12ssp"
+                />
+            <TextView
+                android:id="@+id/item_cart_price"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/_5sdp"
+                android:text="7.50$"
+                android:layout_gravity="center|right"
+                android:fontFamily="@font/calibri"
+                android:textColor="?attr/colorPrimary"
+                android:textSize="@dimen/_14ssp"
+                android:textStyle="bold"
+                />
+        </FrameLayout>
+
+    </LinearLayout>
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="2.1dp"
+        android:layout_gravity="center|left">
+        <ImageView
+            android:layout_width="@dimen/_97sdp"
+            android:layout_height="@dimen/_97sdp"
+            android:src="@drawable/shape_blob"
+            android:elevation="1dp"
+            app:tint="#EEF1F0"/>
+        <ImageView
+            android:id="@+id/item_cart_image"
+            android:layout_width="@dimen/_52sdp"
+            android:layout_height="@dimen/_52sdp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_category_pizza"
+            android:elevation="1dp" />
+    </FrameLayout>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="@dimen/_32sdp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/_9sdp"
+        android:background="@drawable/shape_checkout"
+        android:backgroundTint="@color/white"
+        android:layout_marginRight="@dimen/_10sdp"
+        android:elevation="1.7dp"
+        android:layout_gravity="right|center">
+        <ImageView
+            android:id="@+id/item_cart_minus"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/ic_minus"
+            app:tint="#ddd" />
+        <TextView
+            android:id="@+id/item_cart_number"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:textColor="#333"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:gravity="center"
+            android:textSize="@dimen/_12ssp"
+            android:fontFamily="@font/calibri"
+            app:tint="?attr/colorPrimary" />
+        <ImageView
+            android:id="@+id/item_cart_add"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_18sdp"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/ic_plus"
+            app:tint="?attr/colorPrimary" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</FrameLayout>
