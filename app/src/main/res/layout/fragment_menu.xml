@@ -8,10 +8,11 @@
 
     <TextView
         android:id="@+id/menu_name"
-        android:layout_width="@dimen/_220sdp"
+        android:layout_width="wrap_content"
         android:lines="2"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/_37sdp"
+        android:layout_marginRight="@dimen/_100sdp"
         android:paddingRight="@dimen/_10sdp"
         android:text="Salads menu"
         android:fontFamily="@font/ultra_reqular"

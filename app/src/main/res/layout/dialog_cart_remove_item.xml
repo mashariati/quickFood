@@ -25,8 +25,9 @@
             android:layout_height="wrap_content"
             android:text="no"
             android:fontFamily="@font/ultra_reqular"
-            android:gravity="top|center"
             android:textSize="@dimen/_12ssp"
+            android:layout_gravity="left|center"
+
             android:background="@drawable/shape_go_to_cart"
             android:layout_marginLeft="@dimen/_30sdp"/>
         <Button
