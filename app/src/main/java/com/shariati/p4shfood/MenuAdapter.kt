@@ -29,6 +29,7 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
         fun bindMenuItem(position: Int, holder: MenuViewHolder){
             Glide.with(context)
                 .load(menuItemsList[position].menuImage)
+                .placeholder(R.drawable.ic_placeholder)
                 .into(menuImage)
             menuName.text = menuItemsList[position].menuName
             menuRating.rating = menuItemsList[position].menuRating

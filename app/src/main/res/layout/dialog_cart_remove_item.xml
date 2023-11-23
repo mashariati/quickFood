@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_cart_remove_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="@dimen/_15sdp"
+    android:background="@drawable/shape_category"
+ >
+<TextView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:text="Are you sure you want to delete this item?"
+    android:fontFamily="@font/calibri"
+    android:textSize="@dimen/_19ssp"
+    android:textAlignment="center"/>
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/_17sdp">
+        <Button
+            android:id="@+id/dialog_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="no"
+            android:fontFamily="@font/ultra_reqular"
+            android:gravity="top|center"
+            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/shape_go_to_cart"
+            android:layout_marginLeft="@dimen/_30sdp"/>
+        <Button
+            android:id="@+id/dialog_yes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:fontFamily="@font/ultra_reqular"
+            android:textSize="@dimen/_12ssp"
+            android:background="@drawable/shape_go_to_cart"
+            android:layout_gravity="right|center"
+            android:layout_marginRight="@dimen/_30sdp"/>
+    </FrameLayout>
+
+</LinearLayout>

@@ -8,11 +8,10 @@ import android.widget.ImageView
 import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 
-class CartAdapter(private val cartItemList: ArrayList<Cart>) :
+class CartAdapter(private val cartItemList: ArrayList<Cart>, private val events: CartEvents) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
     inner class CartViewHolder(itemView: View, private val context: Context) :
         RecyclerView.ViewHolder(itemView) {
@@ -30,21 +29,36 @@ class CartAdapter(private val cartItemList: ArrayList<Cart>) :
             cartNumber.text = cartItemList[position].cartNumber.toString()
             Glide.with(context)
                 .load(cartItemList[position].cartImage)
+                .placeholder(R.drawable.ic_placeholder)
                 .into(cartImage)
 
-            //minus item
-            var isMinusEnable = false
-            if (itemView.findViewById<TextView>(R.id.item_cart_number).text != "1") {
-                itemView.findViewById<ImageView>(R.id.item_cart_minus)
-                    .setColorFilter(ContextCompat.getColor(context, R.color.red))
-                isMinusEnable = true
+
+            //reduce the number of item if you click to minus button
+            if(itemView.findViewById<TextView>(R.id.item_cart_number).text.toString().toInt()>1){
+                itemView.findViewById<ImageView>(R.id.item_cart_minus).setColorFilter(
+                    ContextCompat.getColor(context, R.color.red))
+            }else{
+                itemView.findViewById<ImageView>(R.id.item_cart_minus).setColorFilter(
+                    ContextCompat.getColor(context, R.color.cart_color))
+            }
+            itemView.findViewById<ImageView>(R.id.item_cart_minus).setOnClickListener {
+
+                events.reduceNOfI(cartItemList[adapterPosition],adapterPosition,itemView)
             }
 
-            itemView.findViewById<ImageView>(R.id.item_cart_minus).setOnClickListener {
-                val mainAc = context as MainActivity
-                if (isMinusEnable) {
-                    mainAc.minusItem(cartItemList[position])
-                }
+            //add the number of item if you click to minus button
+
+            itemView.findViewById<ImageView>(R.id.item_cart_add).setOnClickListener {
+
+                events.addNToI(cartItemList[adapterPosition],adapterPosition,itemView)
+            }
+
+            //remove an item from the cartList
+            itemView.setOnLongClickListener {
+
+                events.removeItem(cartItemList[adapterPosition], adapterPosition)
+
+                true
             }
         }
 
@@ -61,5 +75,24 @@ class CartAdapter(private val cartItemList: ArrayList<Cart>) :
 
     override fun onBindViewHolder(holder: CartViewHolder, position: Int) {
         holder.bindCartItem(position)
+    }
+
+    interface CartEvents {
+        fun removeItem(cart: Cart, position: Int)
+        fun reduceNOfI(cart: Cart, position: Int, itemView: View)
+        fun addNToI(cart: Cart, position: Int, itemView: View)
+    }
+
+    fun removeItem(cart: Cart, position: Int) {
+        cartItemList.remove(cart)
+        notifyItemRemoved(position)
+    }
+    fun reduceItem(cart: Cart,position: Int){
+        cart.cartNumber--
+        notifyItemChanged(position)
+    }
+    fun addItem(cart: Cart,position: Int){
+        cart.cartNumber++
+        notifyItemChanged(position)
     }
 }

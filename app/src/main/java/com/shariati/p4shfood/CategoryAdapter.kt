@@ -24,6 +24,7 @@ class CategoryAdapter(private val data: ArrayList<Category>,private val itemOnCl
             categoryNumber.text = data[position].categoryNumber.toString() + " items"
             Glide.with(contex)
                 .load(data[position].categoryImage)
+                .placeholder(R.drawable.ic_placeholder)
                 .into(categoryImage)
 
             itemView.setOnClickListener{

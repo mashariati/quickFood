@@ -197,6 +197,9 @@ var cartItemNumber = 0
             scaleYAnimator2.interpolator = AccelerateDecelerateInterpolator()
             scaleYAnimator2.start()
         binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.red),android.graphics.PorterDuff.Mode.SRC_IN)
+            binding.goToCartNumber.backgroundTintList=ColorStateList.valueOf(getColor(R.color.red))
+            binding.goToCartNumber.setTextColor(getColor(R.color.white))
+
             isCartFull=true
         }
 
@@ -216,15 +219,17 @@ cartItem.forEach {
 }
 
     }
-//removed an item from cart when you click to minus button
-fun minusItem(item:Cart){
-    cartItem.forEach {
-        if(it.cartName==item.cartName){
-            it.cartNumber--
-
+    //set the go to cart number if you remove an item from the cart
+    fun setCartIconNumberText(isNotZero:Boolean){
+        if(isNotZero) {
+            binding.goToCartNumber.text = cartItem.size.toString()
+        }else{
+            isCartFull=false
+            cartItemNumber=0
+            binding.cartIcon.setColorFilter(ContextCompat.getColor(this,R.color.cart_color),android.graphics.PorterDuff.Mode.SRC_IN)
+            binding.goToCart.visibility = View.GONE
+            binding.goToCartNumber.visibility=View.GONE
         }
-
-    }
     }
 
 }
