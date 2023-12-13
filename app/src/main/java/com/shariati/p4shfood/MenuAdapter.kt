@@ -15,27 +15,23 @@ import android.widget.Toast
 import androidx.core.view.marginTop
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.shariati.p4shfood.databinding.ItemMenuBinding
 
 class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapter<MenuAdapter.MenuViewHolder>() {
 
-    inner class MenuViewHolder(itemView:View,private val context:Context):RecyclerView.ViewHolder(itemView){
-        val menuImage=itemView.findViewById<ImageView>(R.id.item_menu_image)
-        val menuName=itemView.findViewById<TextView>(R.id.item_menu_name)
-        val menuRating=itemView.findViewById<RatingBar>(R.id.item_menu_rating)
-        val menuWeight=itemView.findViewById<TextView>(R.id.item_menu_weight)
-        val menuPrice=itemView.findViewById<TextView>(R.id.item_menu_price)
-        val menuDetails=itemView.findViewById<TextView>(R.id.item_menu_details_text)
+    inner class MenuViewHolder(private val binding: ItemMenuBinding ,private val context:Context):RecyclerView.ViewHolder(binding.root){
 
-        fun bindMenuItem(position: Int, holder: MenuViewHolder){
+
+        fun bindMenuItem(position: Int){
             Glide.with(context)
                 .load(menuItemsList[position].menuImage)
                 .placeholder(R.drawable.ic_placeholder)
-                .into(menuImage)
-            menuName.text = menuItemsList[position].menuName
-            menuRating.rating = menuItemsList[position].menuRating
-            menuWeight.text = menuItemsList[position].menuWeight.toString()+"gr"
-            menuPrice.text = menuItemsList[position].menuPrice.toString()+"$"
-            menuDetails.text=menuItemsList[position].menuDetails
+                .into(binding.itemMenuImage)
+            binding.itemMenuName.text = menuItemsList[position].menuName
+            binding.itemMenuRating.rating = menuItemsList[position].menuRating
+            binding.itemMenuWeight.text = menuItemsList[position].menuWeight.toString()+"gr"
+            binding.itemMenuPrice.text = menuItemsList[position].menuPrice.toString()+"$"
+            binding.itemMenuDetailsText.text=menuItemsList[position].menuDetails
 
             var menuModel = Cart(
                 menuItemsList[position].menuName,
@@ -45,18 +41,20 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
                 menuItemsList[position].menuPrice,
                 1
             )
-            itemView.findViewById<ImageView>(R.id.item_menu_add).setOnClickListener {
+            binding.itemMenuAdd.setOnClickListener {
+                //call onMenuAdd method in activity for add an item to cart
                 val mainActivity = context as MainActivity
                 mainActivity.onMenuAdd(menuModel)
 
             }
-            itemView.setOnClickListener{
-                if(holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility==View.GONE) {
-                    holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility =
+            //show description when clicked an item
+            binding.root.setOnClickListener{
+                if(binding.itemMenuDetails.visibility==View.GONE) {
+                    binding.itemMenuDetails.visibility =
                         View.VISIBLE
                     val alphaHolder = PropertyValuesHolder.ofFloat("alpha", 0f, 1f)
                     val scaleYAnimator = ObjectAnimator.ofPropertyValuesHolder(
-                        holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details),
+                        binding.itemMenuDetails,
                         alphaHolder
                     )
                     scaleYAnimator.duration = 1000
@@ -65,7 +63,7 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
 
                 }
                 else{
-                    holder.itemView.findViewById<FrameLayout>(R.id.item_menu_details).visibility =
+                    binding.itemMenuDetails.visibility =
                         View.GONE
 
                 }
@@ -74,8 +72,9 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_menu,parent,false)
-            return MenuViewHolder(view,parent.context)
+        //create view binding for adapter
+       val binding = ItemMenuBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return MenuViewHolder(binding,parent.context)
     }
 
     override fun getItemCount(): Int {
@@ -83,7 +82,7 @@ class MenuAdapter(private val menuItemsList:ArrayList<Menu>):RecyclerView.Adapte
     }
 
     override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
-    holder.bindMenuItem(position,holder)
+    holder.bindMenuItem(position)
 
 
     }

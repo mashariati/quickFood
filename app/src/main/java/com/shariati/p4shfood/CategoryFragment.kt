@@ -1,6 +1,7 @@
 package com.shariati.p4shfood
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,16 +17,22 @@ import kotlin.math.log
 
 class CategoryFragment(private val categoryCh:FragmentChanged) : Fragment(),CategoryAdapter.CategoryItemOnClick {
     lateinit var binding: FragmentCategoryBinding
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = FragmentCategoryBinding.inflate(layoutInflater)
 
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        binding = FragmentCategoryBinding.inflate(layoutInflater)
+
+        //call fragmentChange method for animations and background colors
+        categoryCh.fragmentChanged("category")
+        // Inflate the layout for this fragment
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         //set category adapter
         val categoryList: ArrayList<Category> = arrayListOf(
             Category(
@@ -64,24 +71,25 @@ class CategoryFragment(private val categoryCh:FragmentChanged) : Fragment(),Cate
         val categoryAdapter = CategoryAdapter(categoryList,this)
         binding.categoryRecyclerView.adapter = categoryAdapter
         binding.categoryRecyclerView.layoutManager  = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
-        // Inflate the layout for this fragment
-        return binding.root
+
+
     }
 
-    override fun onStart() {
-        super.onStart()
-        categoryCh.fragmentChanged("category")
-    }
     override fun onCategoryItemOnclick(pos:Int) {
-                val transaction = parentFragmentManager.beginTransaction()
-                transaction.setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
-                transaction.replace(R.id.fragment_container,MenuFragment(categoryCh))
-                transaction.addToBackStack(null)
-                transaction.commit()
         //pass the position to menu fragment
         val bundle = Bundle()
         bundle.putInt("position",pos)
-        parentFragmentManager.setFragmentResult("pos",bundle)
+        val menuFragment = MenuFragment(categoryCh)
+        menuFragment.arguments = bundle
+
+        //transaction for go to the next fragment
+                val transaction = parentFragmentManager.beginTransaction()
+                transaction.setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
+                transaction.replace(R.id.fragment_container,menuFragment)
+                transaction.addToBackStack(null)
+
+                transaction.commit()
+
 
     }
 

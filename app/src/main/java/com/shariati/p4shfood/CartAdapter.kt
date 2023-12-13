@@ -10,51 +10,51 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.shariati.p4shfood.databinding.ItemCartBinding
 
 class CartAdapter(private val cartItemList: ArrayList<Cart>, private val events: CartEvents) :
     RecyclerView.Adapter<CartAdapter.CartViewHolder>() {
-    inner class CartViewHolder(itemView: View, private val context: Context) :
-        RecyclerView.ViewHolder(itemView) {
-        val cartName = itemView.findViewById<TextView>(R.id.item_cart_name)
-        val cartImage = itemView.findViewById<ImageView>(R.id.item_cart_image)
-        val cartRaiting = itemView.findViewById<RatingBar>(R.id.item_cart_rating)
-        val cartWeight = itemView.findViewById<TextView>(R.id.item_cart_weight)
-        val cartPrice = itemView.findViewById<TextView>(R.id.item_cart_price)
-        val cartNumber = itemView.findViewById<TextView>(R.id.item_cart_number)
+    inner class CartViewHolder(private val binding: ItemCartBinding, private val context: Context) :
+        RecyclerView.ViewHolder(binding.root) {
+
         fun bindCartItem(position: Int) {
-            cartName.text = cartItemList[position].cartName
-            cartRaiting.rating = cartItemList[position].cartRating
-            cartWeight.text = cartItemList[position].cartWeight.toString() + "gr"
-            cartPrice.text = cartItemList[position].cartPrice.toString() + "$"
-            cartNumber.text = cartItemList[position].cartNumber.toString()
+            binding.itemCartName.text = cartItemList[position].cartName
+            binding.itemCartRating.rating = cartItemList[position].cartRating
+            binding.itemCartWeight.text = cartItemList[position].cartWeight.toString() + "gr"
+            binding.itemCartPrice.text = cartItemList[position].cartPrice.toString() + "$"
+            binding.itemCartNumber.text = cartItemList[position].cartNumber.toString()
             Glide.with(context)
                 .load(cartItemList[position].cartImage)
                 .placeholder(R.drawable.ic_placeholder)
-                .into(cartImage)
+                .into(binding.itemCartImage)
 
 
             //reduce the number of item if you click to minus button
-            if(itemView.findViewById<TextView>(R.id.item_cart_number).text.toString().toInt()>1){
-                itemView.findViewById<ImageView>(R.id.item_cart_minus).setColorFilter(
-                    ContextCompat.getColor(context, R.color.red))
-            }else{
-                itemView.findViewById<ImageView>(R.id.item_cart_minus).setColorFilter(
-                    ContextCompat.getColor(context, R.color.cart_color))
+            if (binding.itemCartNumber.text.toString()
+                    .toInt() > 1
+            ) {
+                binding.itemCartMinus.setColorFilter(
+                    ContextCompat.getColor(context, R.color.red)
+                )
+            } else {
+                binding.itemCartMinus.setColorFilter(
+                    ContextCompat.getColor(context, R.color.cart_color)
+                )
             }
-            itemView.findViewById<ImageView>(R.id.item_cart_minus).setOnClickListener {
+            binding.itemCartMinus.setOnClickListener {
 
-                events.reduceNOfI(cartItemList[adapterPosition],adapterPosition,itemView)
+                events.reduceNOfI(cartItemList[adapterPosition], adapterPosition,binding.root)
             }
 
             //add the number of item if you click to minus button
 
-            itemView.findViewById<ImageView>(R.id.item_cart_add).setOnClickListener {
+            binding.itemCartAdd.setOnClickListener {
 
-                events.addNToI(cartItemList[adapterPosition],adapterPosition,itemView)
+                events.addNToI(cartItemList[adapterPosition], adapterPosition, binding.root)
             }
 
             //remove an item from the cartList
-            itemView.setOnLongClickListener {
+           binding.root.setOnLongClickListener {
 
                 events.removeItem(cartItemList[adapterPosition], adapterPosition)
 
@@ -65,8 +65,8 @@ class CartAdapter(private val cartItemList: ArrayList<Cart>, private val events:
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CartViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_cart, parent, false)
-        return CartViewHolder(view, parent.context)
+        val binding = ItemCartBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CartViewHolder(binding, parent.context)
     }
 
     override fun getItemCount(): Int {
@@ -87,11 +87,13 @@ class CartAdapter(private val cartItemList: ArrayList<Cart>, private val events:
         cartItemList.remove(cart)
         notifyItemRemoved(position)
     }
-    fun reduceItem(cart: Cart,position: Int){
+
+    fun reduceItem(cart: Cart, position: Int) {
         cart.cartNumber--
         notifyItemChanged(position)
     }
-    fun addItem(cart: Cart,position: Int){
+
+    fun addItem(cart: Cart, position: Int) {
         cart.cartNumber++
         notifyItemChanged(position)
     }

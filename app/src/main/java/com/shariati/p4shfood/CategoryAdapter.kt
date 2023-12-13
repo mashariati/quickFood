@@ -9,23 +9,21 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.shariati.p4shfood.databinding.ItemCategoryBinding
 
 class CategoryAdapter(private val data: ArrayList<Category>,private val itemOnClick:CategoryItemOnClick) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHolder>() {
 
 
-    inner class CategoryViewHolder(itemView: View,private val contex:Context) : RecyclerView.ViewHolder(itemView) {
+    inner class CategoryViewHolder(private val binding: ItemCategoryBinding,private val context:Context) : RecyclerView.ViewHolder(binding.root) {
 
-        val categoryImage = itemView.findViewById<ImageView>(R.id.item_category_image)
-        val categoryName = itemView.findViewById<TextView>(R.id.item_category_name)
-        val categoryNumber = itemView.findViewById<TextView>(R.id.item_category_number)
         fun bindData(position: Int) {
-            categoryName.text = data[position].categoryName
-            categoryNumber.text = data[position].categoryNumber.toString() + " items"
-            Glide.with(contex)
+            binding.itemCategoryName.text = data[position].categoryName
+            binding.itemCategoryNumber.text = data[position].categoryNumber.toString() + " items"
+            Glide.with(context)
                 .load(data[position].categoryImage)
                 .placeholder(R.drawable.ic_placeholder)
-                .into(categoryImage)
+                .into(binding.itemCategoryImage)
 
             itemView.setOnClickListener{
                 itemOnClick.onCategoryItemOnclick(position)
@@ -34,9 +32,10 @@ class CategoryAdapter(private val data: ArrayList<Category>,private val itemOnCl
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_category, parent, false)
-        return CategoryViewHolder(view,parent.context)
+//create view binding for adapter
+        val binding = ItemCategoryBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+
+        return CategoryViewHolder(binding,parent.context)
     }
 
     override fun getItemCount(): Int {

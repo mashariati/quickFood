@@ -20,21 +20,35 @@ class CartFragment(private val cartch: FragmentChanged) : Fragment(),CartAdapter
     lateinit var binding: FragmentCartBinding
     lateinit var getCartFragItems:MainActivity
     lateinit var cartAdapter:CartAdapter
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentCartBinding.inflate(layoutInflater)
-    BottomSheetBehavior.from(binding.cartSummary).apply {
-        peekHeight= resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._60sdp)
-        this.state=BottomSheetBehavior.STATE_COLLAPSED
+        //call fragmentChange method for animations and background colors
+        cartch.fragmentChanged("cart")
+
+        // Inflate the layout for this fragment
+        return binding.root
+
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        //create bottom sheet for cart summary
+        BottomSheetBehavior.from(binding.cartSummary).apply {
+            peekHeight= resources.getDimensionPixelSize(com.intuit.sdp.R.dimen._60sdp)
+            this.state=BottomSheetBehavior.STATE_COLLAPSED
+        }
+        //get cart fragment items list from main activity and set adapter
         getCartFragItems = context as MainActivity
         cartAdapter=CartAdapter(getCartFragItems.cartItem,this)
         binding.cartRecyclerView.adapter=cartAdapter
         binding.cartRecyclerView.layoutManager=LinearLayoutManager(context, VERTICAL,false)
-
+//fill the summary bottom sheet
         fillTheSummary()
-
     }
+
     //Enter the value in the summary
     private fun fillTheSummary(){
         var subTotal = 0f
@@ -51,21 +65,6 @@ class CartFragment(private val cartch: FragmentChanged) : Fragment(),CartAdapter
     }
 
 
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return binding.root
-
-    }
-
-    override fun onStart() {
-        super.onStart()
-        cartch.fragmentChanged("cart")
-    }
-
     //remove an item from the Cart fragment
     override fun removeItem(cart: Cart, position: Int) {
         //show the dialog when you long click to an item
@@ -74,13 +73,15 @@ class CartFragment(private val cartch: FragmentChanged) : Fragment(),CartAdapter
         dialog.setView(dialogView.root)
         dialog.setCancelable(true)
         dialog.show()
-        //remove or cancel remove the item
+        //cancel remove an item
         dialogView.dialogNo.setOnClickListener {
             dialog.dismiss()
         }
+        //remove an item from arraylist
         dialogView.dialogYes.setOnClickListener {
             cartAdapter.removeItem(cart,position)
             cart.cartNumber=1
+            //go to category fragment if the cart item list is empty
             if(getCartFragItems.cartItem.size==0){
                 val transaction = parentFragmentManager.beginTransaction()
                 transaction.setCustomAnimations(R.anim.enter_right_to_left,R.anim.exit_right_to_left,R.anim.enter_left_to_right,R.anim.exit_left_to_right)
